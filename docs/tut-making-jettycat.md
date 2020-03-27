@@ -2,7 +2,7 @@
 
 Similar to Flappy Bird, Jetty Cat will be a game where a cat, manipulated by tapping or clicking, avoids infinite obstacles by using its jetpack. We will firstly implement main game logic, then — UI. After that, we will polish the game by adding nice transitions, particle systems and subtle effects.
 
-![The result of the tutorial](./images/tutJettyCat_result.gif)
+![The result of the tutorial](./images/tutJettyCat_Result.gif)
 
 That's what we will do:
 
@@ -141,7 +141,7 @@ if (ct.actions.Poof.down) {
 
 `if (ct.actions.Poof.down)` work only when a player presses the screen. If it works, we will define a gravity force that pulls the cat down and add speed that pulls the cat upwards. We need to multiply the added speed with `ct.delta` to make it run smoothly on every occasion.
 
-::: tip `ct.delta`
+::: tip ct.delta
 `ct.delta` will be equal to 1 most of the time, but this multiplier should not be overlooked. If a player's framerate drops, or the game lags for some reason, `ct.delta` will become a larger value to compensate these frame drops and lags. For example, if framerate drops from 60 frames per second to 30, then `ct.delta` will temporarily be equal to 2.
 
 Besides that, `ct.delta` supports in-game time stretching and allows for creating slow-mo effects and game pauses. (And we will implement these features!)
@@ -214,10 +214,6 @@ if (!this.gameover && ct.place.occupied(this, 'Obstacle')) {
 }
 ```
 
-::: tip
-
-:::
-
 `ct.place.occupied` checks for a collision of a given copy with a specific collision group. This method is provided by `ct.place` module, and you can find its reference for other methods in the "Catmods" tab.
 
 We will also need this block of code right at the beginning of On Step event:
@@ -244,7 +240,7 @@ If we now open our room and move the mouse over the level, we will see current c
 
 Modify the collision logic as following so the cat gets stunned from hitting the ground an sky as well. Note that we added parenthesis around new comparisons and `ct.place.occupied` to divide them
 
-```js
+```js {3,4,5,6}
 // If the game is not over, the cat bumped into something solid, or
 if (!this.gameover && (ct.place.occupied(this, 'Obstacle') ||
     // the cat is below the ground minus its approximate height, or
@@ -266,6 +262,10 @@ if (!this.gameover && (ct.place.occupied(this, 'Obstacle') ||
 
 
 ### Randomizing pipe's height by changing its texture
+
+We changed the cat's texture in the code above with `this.tex = 'NewTextureName';`.
+
+…
 
 ## Spawning pipes through time
 

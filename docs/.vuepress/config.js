@@ -66,7 +66,8 @@ module.exports = {
                 title: 'Tutorials',
                 children: [
                     'tut-making-shooter',
-                    'tut-making-platformer'
+                    'tut-making-platformer',
+                    'tut-making-jettycat'
                 ],
             }, {
                 title: 'The `core` library',
