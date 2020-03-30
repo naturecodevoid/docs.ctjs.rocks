@@ -647,68 +647,14 @@ ct.u.wait(1000)
 A-a-and… ta-da! You did it! The game is fully-featured and playable!
 
 ::: tip
-`ct.u.wait(1000)` is an asynchronous method that waits for one second, then executes a given code in the `then(() => {…})` part. "Asynchronous" means that the code is executed outside the On Step event, and happens later in the game.
+`ct.u.wait(1000)` is an asynchronous method that waits for one second, then executes a given code in the `.then(() => {…})` part. "Asynchronous" means that the code is executed outside the On Step event, and happens later in the game.
 
-You will always find the structure `method().then(() => {…})` while working with asynchronous actions. When you don't need to use them, though, you can omit the part with `.then(() => {…})`.
+You will always find the structure `method().then(() => {…})` while working with asynchronous actions. In JavaScript world, such actions are also called "Promises". When you don't need to use them, though, you can omit the part with `.then(() => {…})`.
 :::
-
-Have some rest now, and move on to the polishing step later.
-
-
-## Polishing the game
-
-The game is complete mechanic-wise, but there is a lot of ways to improve it aesthetically and gameplay-wise! This section also highlights a number of new v1.3 features.
-
-### Transition between rooms
-
-Ct.js has a module called `ct.transision`. It allows you to easily create nice transitions between levels. The idea is that you start a first half of a transition on button press or some other event, then switch to another room, and call the second half of a transition in its On Create code.
-
-Enable the module `transition` in the Catmods tab. It signals that it depends on the `tween` catmod, so enable it as well.
-
-Now, modify the `Button_Play` On Step code so that it shows a blue circled transition when clicked:
-
-```js
-if (ct.touch.collideUi(this)) {
-    if (!this.pressed) {
-        this.pressed = true;
-        ct.transition.circleOut(1000, 0x446ADB)
-        .then(() => {
-            ct.rooms.switch('InGame');
-        });
-    }
-}
-```
-
-`this.pressed` is our custom variable that remembers that a button was pressed. It will help us prevent occasional double clicking, that may have negative effects on game's logic.
-
-The first argument in `ct.transition.circleOut(1000, 0x446ADB)` is the duration of the effect (1000 milliseconds = 1 second), and the second one is the color of the transition. It is like the hex color, but with `0x` instead of `#` in the beginning.
-
-::: tip
-There are much more methods and examples in the module's "Info" and "Reference" tabs.
-:::
-
-The transition itself is an asynchronous action! We use `.then(() => {…})` to switch to the next room right when the transition ends.
-
-That was the first part of the transition. The second one will go to the `InGame` On Create code. Open the room, and put this line:
-
-```
-ct.transition.circleIn(500, 0x446ADB);
-```
-
-We can also show up our UI layers (the pause menu and the score screen) by making them transparent but slowly turning them opaque. We will use `ct.tween` there — that one catmod that is used by `ct.transition`.
-
-
-### Cat's jet smoke and star particles
-
-### Adding subtle animations to the cat and stars
-
-### Adding a hint to start tapping
-
-### Smoothly resuming the game after it has been paused
-
-### Animating background in the main menu + parallax effect
 
 ## That's it!
+
+For transitions, particle effects and other fancy stuff, visit [the second part of this tutorial](tut-polishing-jettycat.html) where we polish the game.
 
 Try changing this stuff to train yourself in coding:
 
